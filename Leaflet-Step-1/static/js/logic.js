@@ -2,7 +2,7 @@ function init() {
 console.log("init")
     // Creating our initial map object
     var myMap = L.map("mapid", {
-        center: [45.52, -122.67],
+        center: [54.5260, -15.2551],
         zoom: 2
     });
 
@@ -39,9 +39,7 @@ console.log("init")
             else {
                 color = "red";
             }
-
-            
-            
+                        
             // Add circles to map
             L.circle([data.features[i].geometry.coordinates[0],data.features[i].geometry.coordinates[1]] , {
                 fillOpacity: 1,
@@ -51,23 +49,20 @@ console.log("init")
                 radius: data.features[i].properties.mag * 50000
             }).bindPopup("<h1>" + data.features[i].properties.title + "</h1> <hr> <h3>" + data.features[i].properties.mag + " " + data.features[i].properties.type + "</h3>").addTo(myMap);
         };
-    
-    
-    
-    
-    
+          
+        
     })
 
     //adding legend
     var legend = L.control({position: 'bottomright'});
 
-    legend.onAdd = function (legend) {
+    legend.onAdd = function (map) {
 
         var div = L.DomUtil.create('div', 'info legend'),
-            grades = [],
-            labels = [];
+            grades = [0,25,75,200,10000],
+            labels = [0,25,75,200,10000];
 
-    // loop through our density intervals and generate a label with a colored square for each interval
+    //loop through our density intervals and generate a label with a colored square for each interval
         for (var i = 0; i < grades.length; i++) {
             div.innerHTML +=
                 '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
@@ -77,7 +72,7 @@ console.log("init")
     return div;
 };
 
-legend.addTo(map);
+legend.addTo(myMap);
 
 };
 
