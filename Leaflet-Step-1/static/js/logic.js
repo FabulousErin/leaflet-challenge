@@ -59,13 +59,13 @@ console.log("init")
     legend.onAdd = function (map) {
 
         var div = L.DomUtil.create('div', 'info legend'),
-            grades = [0,25,75,200,10000],
-            labels = [0,25,75,200,10000];
+            grades = [0,25,75,200],
+            labels = ['#CB2B3E','#2AAD27','#2A81CB','#FFD326'];
 
     //loop through our density intervals and generate a label with a colored square for each interval
         for (var i = 0; i < grades.length; i++) {
             div.innerHTML +=
-                '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
+                '<i style="background:' + labels[i]  + '"></i> ' +
                 grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
         }
 
